@@ -17,11 +17,11 @@
             </tr>
             <tr>
                 <th>LastName</th>
-                <td>{{ user.lastName }}</td>
+                <td>{{ user.lastName ? user.lastName : '----' }}</td>
             </tr>
             <tr>
                 <th>Age</th>
-                <td>{{ user.age }}</td>
+                <td>{{ user.age ? user.age : '----' }}</td>
             </tr>
             <tr>
                 <th>Email</th>
