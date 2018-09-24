@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -22,6 +23,7 @@ class User
     /**
      * @ORM\Column(type="string", length=50, options={"unsigned": true})
      * @Assert\NotBlank()
+     * @Assert\Length(min=3)
      */
     private $firstName;
 
@@ -41,7 +43,6 @@ class User
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
-     * @Assert\NotBlank()
      * @Assert\Email(
      * message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = true
@@ -56,6 +57,11 @@ class User
      * @ORM\Column(type="guid", unique=true)
      */
     private $Uuid;
+
+    public function __construct()
+    {
+        $this->Uuid = Uuid::uuid4()->toString();
+    }
 
     public function getId(): ?int
     {
